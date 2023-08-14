@@ -120,6 +120,7 @@ export function GenerateQuery<T extends object>(
 				.repeat(keys.length)
 				.split("")
 				.join(", ")})`;
+			query += `  RETURNING *`
 			break;
 		}
 		case QueryType.UPDATE: {
