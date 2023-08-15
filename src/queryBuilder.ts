@@ -145,6 +145,7 @@ export function GenerateQuery<T extends object>(
 				}
 				if (whereStmt.length) query += ` WHERE ${whereStmt.join(" AND ")}`;
 			}
+			query += `  RETURNING *`
 			break;
 		}
 		case QueryType.UPSERT: {
@@ -178,6 +179,7 @@ export function GenerateQuery<T extends object>(
 			query += ` ON CONFLICT (${primaryKeyStr}) DO UPDATE SET`;
 			query += ` ${updateDataKeys.map((key) => `${key} = ?`).join(", ")}`;
 			query += ` WHERE ${whereKeys.map((key) => `${key} = ?`).join(" AND ")}`;
+			query += `  RETURNING *`
 			break;
 		}
 		default:
